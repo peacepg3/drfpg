@@ -1,0 +1,12 @@
+<form method="post" action="result" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="SONG_NAME" placeholder="name">
+    <input type="text" name="SONG_CATEGORY" placeholder="select category">
+    <input type="text" name="SONG_BY" placeholder="artist">
+    <input type="text" name="SONG_DES" placeholder="descriptions">
+    <input type="url" name="SONG_IMG" placeholder="image link">
+    <input type="datetime-local" name="SONG_UPLODED" placeholder="created at">
+    <input type="number" name="SONG_RATE" placeholder="rate your song">
+    <input type="text" name="FAVORITE" placeholder="your favorite">
+    <input type="submit" placeholder="Upload">
+</form>
