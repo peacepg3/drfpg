@@ -5,7 +5,7 @@ from .models import upload,song
 from rest_framework import permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.decorators import api_view,permission_classes,authentication_classes
+from rest_framework.decorators import api_view,permission_classes,authentication_classes,parser_classes
 from rest_framework.permissions import IsAuthenticated
 from tests.objone import serialobj
 from .serializer import UploadSerilizer
@@ -16,6 +16,7 @@ from rest_framework import mixins
 from rest_framework import viewsets
 from .pagination import MyPagination
 from rest_framework.authentication import SessionAuthentication,BasicAuthentication,TokenAuthentication
+from rest_framework.parsers import JSONParser
 
 
 
@@ -109,13 +110,16 @@ class SongGenericDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UploadSerilizer
 
 
-
+@permission_classes([IsAuthenticated])
+@authentication_classes([SessionAuthentication,TokenAuthentication])
 class SongViewset(viewsets.ModelViewSet):
     # authentication_classes = SessionAuthentication   # bye using classbased authentication is not work in my case
     # permission_classes = IsAuthenticated         # so am gonna use the decorator here but i should learn this working
     queryset = song.objects.all()
     serializer_class = UploadSerilizer
     pagination_class = MyPagination
+
+    parser_classes(JSONParser)
 
 # the reason i am not using the BaseAuthentication class is that it will use the cache of my username and password
 # so even i am logged out it will not redirect the login page .... i think this is my problem i dont know its right or not...
