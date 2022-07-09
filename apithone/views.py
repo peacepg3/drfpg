@@ -120,7 +120,4 @@ class SongViewset(viewsets.ModelViewSet):
     pagination_class = MyPagination
 
     parser_classes(JSONParser)
-
-# the reason i am not using the BaseAuthentication class is that it will use the cache of my username and password
-# so even i am logged out it will not redirect the login page .... i think this is my problem i dont know its right or not...
-
+#the parser is used for convert the serialized data to a python format that the user needed.
